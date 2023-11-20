@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MusicPlayer"
+        tools:targetApi="31">
+        <activity
+            android:name=".ForgetPasswordActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".WelcomActivity"
+            android:exported="true">
+
+            <!--
+                <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".PersionalMusicPlay"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.example.persion-music" />
+
+                <category android:name="com.example.persion-music.category" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".PersionalCenter"
+            android:exported="false" />
+        <activity
+            android:name=".MusicPlayActivity"
+            android:exported="true">
+
+            <!--
+                <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false">
+<!--            <intent-filter>
+
+                &lt;!&ndash; <action android:name="com.example.music-player" /> &ndash;&gt;
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                &lt;!&ndash; <category android:name="com.example.music-player.register.category" /> &ndash;&gt;
+            </intent-filter>-->
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"></activity>
+    </application>
+
+</manifest>
