@@ -116,4 +116,10 @@
     <string name="pwdreset">重置密码</string>
     <string name="pwd_and_ensurePwd">两次密码不一致</string>
     <string name="resetsuccessful">重置成功</string>
+    <string name="not_have_music">没有本地音乐</string>
+    <string name="no_have_musicplayer">没有播放器</string>
+    <string name="lastMusic">目前是最后一首</string>
+    <string name="firstMusic">目前是第一首</string>
+    <string name="song_not_exist">歌曲不存在</string>
+    <string name="songerror">歌曲错误</string>
 </resources>

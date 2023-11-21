@@ -86,7 +86,7 @@
         android:textSize="16sp"
         android:textColor="#4CAF50"
         android:textStyle="bold"
-        android:id="@+id/musicPlayCenterstartTime"/>
+        android:id="@+id/musicPlayCenterendTime"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -97,7 +97,7 @@
         android:textSize="16sp"
         android:textColor="#4CAF50"
         android:textStyle="bold"
-        android:id="@+id/musicPlayCenterendTime"/>
+        android:id="@+id/musicPlayCenterstartTime"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
