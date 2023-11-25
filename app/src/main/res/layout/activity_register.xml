@@ -4,13 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backregister"
     tools:context=".RegisterActivity">
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
-    android:layout_height="500dp"
-    android:alpha="0.4"
+    android:layout_height="wrap_content"
     app:contentPadding="30dp"
     app:cardCornerRadius="60dp"
     android:layout_marginLeft="30dp"
@@ -23,12 +21,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="@string/name_user"
-                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/login_user"/>
             <EditText
                 android:id="@+id/user_register"
                 android:layout_width="match_parent"
@@ -37,17 +33,16 @@
                 android:inputType="phone"
                 android:textColor="#B43737"
                 android:textSize="18sp"
+                android:hint="@string/name_user_"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="@string/name_pwd"
-                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/pwd_three"/>
 
             <EditText
                 android:id="@+id/pwd_register"
@@ -56,17 +51,16 @@
                 android:inputType="textPassword"
                 android:textColor="#B43737"
                 android:textSize="18sp"
+                android:hint="@string/putintomima"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="@string/pwd_resure_hint"
-                android:textStyle="bold"/>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/pwd_two"/>
 
             <EditText
                 android:id="@+id/pwd_register_rensure"
@@ -75,12 +69,13 @@
                 android:inputType="textPassword"
                 android:textColor="#B43737"
                 android:textSize="18sp"
+                android:hint="@string/ensure__pwd"
                 tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
         </LinearLayout>
         <CheckBox
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="请阅读相关协议"
+            android:text="@string/yueduxieyi"
             android:id="@+id/register_agrement"/>
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,7 +97,7 @@
                         android:layout_height="match_parent"
                         android:text="@string/login"
                         android:textStyle="italic"
-                        android:background="#7A00BCD4"
+                        android:background="#00000000"
                         android:gravity="center"
                         android:textSize="25sp"
                         android:focusable="true" />
@@ -114,6 +109,7 @@
                     android:layout_marginEnd="30dp"
                     android:layout_height="50dp">
                     <TextView
+                        android:elevation="10dp"
                         android:focusable="true"
                         android:clickable="true"
                         android:id="@+id/register_textview_register"
@@ -121,7 +117,7 @@
                         android:layout_height="match_parent"
                         android:text="@string/register"
                         android:gravity="center"
-                        android:background="#7A00BCD4"
+                        android:background="#00000000"
                         android:textSize="25sp"/>
                 </androidx.cardview.widget.CardView>
             </RelativeLayout>

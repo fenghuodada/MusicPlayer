@@ -3,37 +3,34 @@ package com.example.musicplayer;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.media.MediaPlayer;
+import android.media.Image;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.airbnb.lottie.LottieAnimationView;
 
 import java.text.SimpleDateFormat;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+import java.util.Objects;
 
-public class PersionalMusicPlay extends AppCompatActivity implements View.OnClickListener {
+public class PersonalMusicPlay extends AppCompatActivity implements View.OnClickListener {
     private TextView endTime, perisionalSong, PersionalSinger,startTime;
     private SeekBar seekBar;
     private ImageView last_music, next_music, pause_music, listMusic;
-//    private ScheduledExecutorService scheduledExecutorService;
-    private String song_music;
-    private String singer_music;
-    private Myapplication perisionalMyapplition;
     private MyMediaPlayer musicplayer;
     private Runnable runnable;
     private Handler handler;
+    private LottieAnimationView paly;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_persional_music_play);
-//         musicplayer=new MyMediaPlayer();
         musicplayer=Myapplication.musicplayer;
         initView();
         addTimer();
@@ -42,33 +39,27 @@ public class PersionalMusicPlay extends AppCompatActivity implements View.OnClic
     }
 //    添加定时器
     private void addTimer() {
-//        if (scheduledExecutorService==null) {
-//     //org.apache.commons.lang3.concurrent.BasicThreadFactory
-//     scheduledExecutorService = new ScheduledThreadPoolExecutor(1,
-//             new BasicThreadFactory.Builder().namingPattern("example-schedule-pool-%d").daemon(true).build());
-//     scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
-//         @SuppressLint("SimpleDateFormat")
-//         @Override
-//         public void run() {
-//             int timeshow=musicplayer.onMusicSongPosition();
-//             seekBar.setProgress(timeshow);
-//             startTime.setText(new SimpleDateFormat("mm:ss").format(timeshow));
-//         }
-//     },0,1000, TimeUnit.MILLISECONDS);
-// }
+
 
         handler=new Handler();
-         runnable = new Runnable() {
-            @SuppressLint("SimpleDateFormat")
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 int p=musicplayer.onMusicSongPosition();
-                int d=musicplayer.onMusicSongDuration();
                 seekBar.setProgress(p);
                 handler.postDelayed(this,1000);
                 startTime.setText(new SimpleDateFormat("mm:ss").format(p));
             }
-        };
+        },500);
+/*         new Handler(Objects.requireNonNull(Looper.myLooper())).postDelayed(new Runnable() {
+             @Override
+             public void run() {
+                 int p=musicplayer.onMusicSongPosition();
+                 seekBar.setProgress(p);
+                 handler.postDelayed(this,1000);
+                 startTime.setText(new SimpleDateFormat("mm:ss").format(p));
+             }
+         },500);*/
     }
     public void startTimer(){
         handler.postDelayed(runnable,1000);
@@ -78,7 +69,6 @@ public class PersionalMusicPlay extends AppCompatActivity implements View.OnClic
     }
     @Override
     protected void onDestroy() {
-//        scheduledExecutorService.shutdown();
         super.onDestroy();
     }
 
@@ -92,18 +82,20 @@ public class PersionalMusicPlay extends AppCompatActivity implements View.OnClic
         initMusicPlayer();
     }
     private void initMusicPlayer() {
-/*        musicplayer.onMusicPrepare();
-        musicplayer.onMusicSeekTo(Myapplication.getMusicSongInPosition());
-        musicplayer.onMusicStart();*/
-        musicplayer.onMusicSetListener(perisionalSong,PersionalSinger);
+        musicplayer.onMusicSetListener(perisionalSong,PersionalSinger,paly);
         seekBar.setMax(musicplayer.onMusicSongDuration());
-        //seekBar.setProgress(musicplayer.onMusicSongPosition());
-//        startTimer();
+        if (musicplayer.isplaying()) {
+            pause_music.setImageResource(R.drawable.play);
+        }
+        startTimer();
+            paly.setAnimation(R.raw.music);
+            paly.playAnimation();
     }
     private void intSetClickListener() {
         pause_music.setOnClickListener(this);
         next_music.setOnClickListener(this);
         last_music.setOnClickListener(this);
+        listMusic.setOnClickListener(this);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @SuppressLint("SimpleDateFormat")
             @Override
@@ -136,37 +128,47 @@ public class PersionalMusicPlay extends AppCompatActivity implements View.OnClic
         seekBar = findViewById(R.id.musicPlayCenterSeekbar);
         startTime=findViewById(R.id.musicPlayCenterstartTime);
         endTime=findViewById(R.id.musicPlayCenterendTime);
+        paly=findViewById(R.id.musicPlayCenterImage);
     }
     @Override
     public void onClick(View view) {
         if (view.getId()==R.id.musicPlayCenterBottomPause) {
-            musicplayer.PlayeronMusicPause(pause_music);
+            musicplayer.PlayeronMusicPause(pause_music, paly);
             return;
         }
         if (view.getId()==R.id.musicPlayCenterBottomNext) {
-            musicplayer.PlayeronMusicNext(perisionalSong,PersionalSinger);
+            musicplayer.PlayeronMusicNext(perisionalSong,PersionalSinger,paly);
+            seekBar.setProgress(0);
             endTime.setText(Myapplication.getDataMusicList().get(Myapplication.getMusicPosition()).getTime());
             return;
         }
         if (view.getId()==R.id.musicPlayCenterBottomLast) {
-            musicplayer.PlayeronMusicLast(perisionalSong,PersionalSinger);
+            musicplayer.PlayeronMusicLast(perisionalSong,PersionalSinger,paly);
+            seekBar.setProgress(0);
             endTime.setText(Myapplication.getDataMusicList().get(Myapplication.getMusicPosition()).getTime());
+            return;
+        }
+        if (view.getId()==R.id.musicPlayCenterList) {
+            ListDialogFragment listDialogFragment=new ListDialogFragment();
+            listDialogFragment.show(getSupportFragmentManager(), "list");
         }
     }
     @Override
     protected void onStop() {
         Myapplication.setMusicSongInPosition(musicplayer.onMusicSongPosition());
-//        musicplayer.onMusicDesory();
-//        endTimer();
+        endTimer();
+        paly.pauseAnimation();
         super.onStop();
     }
 
+    @SuppressLint("ResourceType")
     @Override
     protected void onRestart() {
         super.onRestart();
-//        musicplayer=new MyMediaPlayer();
         musicplayer=Myapplication.musicplayer;
-//        startTimer();
-
+        startTimer();
+        if (paly!=null) {
+            paly.playAnimation();
+        }
     }
 }

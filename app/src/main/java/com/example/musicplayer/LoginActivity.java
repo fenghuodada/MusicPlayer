@@ -14,6 +14,8 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
+
 public class LoginActivity extends AppCompatActivity{
 
     private TextView user;
@@ -21,15 +23,17 @@ public class LoginActivity extends AppCompatActivity{
     private CheckBox agrement;
     private String str1;
     private String str2;
-    private Button wellogin,welregister;
+    private Button wellogin;
     MySqlHelpOPendb helpOPendb;
-    private User users;
+    private UserBean users;
+    LottieAnimationView work;
+    ScrollingMusicFragment fragment;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_login);
         helpOPendb=new MySqlHelpOPendb(this);
         initView();
         initSetclick();
@@ -41,10 +45,13 @@ public class LoginActivity extends AppCompatActivity{
                 //设置多选框的行为
                 if (b) {
                     agrement.setText(str1);
+                     fragment=new ScrollingMusicFragment();
+                    fragment.show(getSupportFragmentManager(),"agremnt");
                 }
             }
         });
         wellogin.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("QueryPermissionsNeeded")
             @Override
             public void onClick(View view) {
                 Cursor cursor;
@@ -60,12 +67,13 @@ public class LoginActivity extends AppCompatActivity{
                                 String user_names=cursor.getString(cursor.getColumnIndex("user_name"));
                                 @SuppressLint("Range")
                                 String user_pwds=cursor.getString(cursor.getColumnIndex("user_pwd"));
-                                users=new User(user_names,user_pwds);
+                                users=new UserBean(user_names,user_pwds);
                             cursor.close();
                             db.close();
                             if (user.getText().toString().equals(users.getUserNam()) && pwd.getText().toString().equals(users.getUserPwd())) {
 
                                 Intent intent=new Intent(LoginActivity.this, MusicPlayActivity.class);
+                                Myapplication.setUsername(users.getUserNam());
                                 if (intent.resolveActivity(getPackageManager())!= null) {
                                     startActivity(intent);
                                     Toast.makeText(LoginActivity.this, getString(R.string.loginsucceed),Toast.LENGTH_SHORT).show();
@@ -85,24 +93,32 @@ public class LoginActivity extends AppCompatActivity{
                 }
             }
         });
-        welregister.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("QueryPermissionsNeeded")
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(LoginActivity.this,RegisterActivity.class);
-                if (intent.resolveActivity(getPackageManager())!=null) {
-                    startActivity(intent);
-                }
-            }
-        });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        work.pauseAnimation();
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if (work!=null) {
+            work.playAnimation();
+        }else {
+            work=findViewById(R.id.work);
+            work.playAnimation();
+        }
     }
 
     private void initView() {
         user = findViewById(R.id.login_user);
         pwd = findViewById(R.id.login_pwd);
-        wellogin=findViewById(R.id.login_loginButton);
-        welregister=findViewById(R.id.login_registerButton);
+        wellogin=findViewById(R.id.loginButton);
         agrement = findViewById(R.id.loginCheck);
+        work=findViewById(R.id.work);
+        work.playAnimation();
         str1 = getString(R.string.str1);
         str2 = getString(R.string.str2);
     }

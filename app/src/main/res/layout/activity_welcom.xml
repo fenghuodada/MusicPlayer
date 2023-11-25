@@ -1,9 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:theme="@style/HideStyle"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login"
     tools:context=".WelcomActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/ss"
+        android:layout_width="100dp"
+        android:layout_height="30sp"
+        android:layout_centerInParent="true" />
+    <TextView
+        android:id="@+id/wel_login"
+        android:layout_width="100dp"
+        android:layout_height="30sp"
+        android:layout_below="@+id/ss"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="155dp"
+        android:background="#00000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:textSize="18sp"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+    <TextView
+        android:id="@+id/wel_register"
+        android:layout_width="100dp"
+        android:layout_height="30sp"
+        android:layout_below="@+id/wel_login"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:background="#00000000"
+        android:clickable="true"
+        android:focusable="true"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <TextView
+        android:id="@+id/wel_forgetPwd"
+        android:layout_width="100dp"
+        android:layout_height="30sp"
+        android:layout_below="@id/wel_register"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="55dp"
+        android:background="#00000000"
+        android:clickable="true"
+        android:focusable="true"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+</RelativeLayout>
+

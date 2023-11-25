@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EnterActivity">
+
+
+    <TextView
+        android:translationY="40dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/welcome_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/musictocom"
+        android:textStyle="italic"
+        android:layout_alignParentBottom="true"
+        android:textSize="30sp"/>
+    <TextView
+        android:layout_centerVertical="true"
+        android:translationX="-400dp"
+        android:layout_marginTop="500dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/welcome_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bendan"
+        android:textStyle="italic"
+        android:textSize="30sp"/>
+    <com.airbnb.lottie.LottieAnimationView
+        android:translationY="800dp"
+        android:layout_centerVertical="true"
+        android:id="@+id/black_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:elevation="30sp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/black_cat" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:translationY="800dp"
+        android:id="@+id/white_cat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:lottie_loop="true"
+        android:elevation="30sp"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/wel"/>
+</RelativeLayout>

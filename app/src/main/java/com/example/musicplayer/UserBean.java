@@ -1,8 +1,8 @@
 package com.example.musicplayer;
 
-public class User {
+public class UserBean {
 
-    public User(String userNam, String userPwd) {
+    public UserBean(String userNam, String userPwd) {
         this.userNam = userNam;
         this.userPwd = userPwd;
     }

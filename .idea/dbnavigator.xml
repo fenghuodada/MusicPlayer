@@ -12,11 +12,11 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="1f6563d6-b1a5-43a5-877e-32ce827d92eb">
-      <console name="Connection" type="STANDARD" schema="" session="Main" />
+    <connection id="8ea954a0-0ef7-48a3-933c-dd3030225e40">
+      <console name="Connection 2" type="STANDARD" schema="" session="Main" />
     </connection>
-    <connection id="bdd035af-6675-401b-9104-d611fecfde84">
-      <console name="Connection 1" type="STANDARD" schema="" session="Main" />
+    <connection id="542f85fc-d4a7-45e8-bbe9-87ee52950511">
+      <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -26,8 +26,7 @@
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="1f6563d6-b1a5-43a5-877e-32ce827d92eb" dataset="main.UserInformation" active-filter-id="" />
-    <filter-actions connection-id="bdd035af-6675-401b-9104-d611fecfde84" dataset="Music.UserInformation" active-filter-id="" />
+    <filter-actions connection-id="8ea954a0-0ef7-48a3-933c-dd3030225e40" dataset="main.UserInformation" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
@@ -46,13 +45,13 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="1f6563d6-b1a5-43a5-877e-32ce827d92eb" active="true" signed="true">
+      <connection id="8ea954a0-0ef7-48a3-933c-dd3030225e40" active="true" signed="true">
         <database>
-          <name value="Connection" />
+          <name value="Connection 2" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
-          <database-version value="3.41" />
+          <database-version value="3.44" />
           <driver-source value="BUNDLED" />
           <driver-library value="" />
           <driver value="" />
@@ -63,7 +62,7 @@
           <tns-folder value="" />
           <tns-profile value="" />
           <files>
-            <file path="C:\Users\33455\Desktop\android包\dbMusic" schema="main" />
+            <file path="C:\Users\33455\Desktop\ss\dbMusic" schema="dbMusic" />
           </files>
           <type value="NONE" />
           <user value="" />
@@ -142,13 +141,13 @@
           <object-name-filters />
         </object-filters>
       </connection>
-      <connection id="bdd035af-6675-401b-9104-d611fecfde84" active="true" signed="true">
+      <connection id="542f85fc-d4a7-45e8-bbe9-87ee52950511" active="true" signed="true">
         <database>
-          <name value="Connection 1" />
+          <name value="Connection" />
           <description value="" />
           <database-type value="SQLITE" />
           <config-type value="BASIC" />
-          <database-version value="3.41" />
+          <database-version value="3.44" />
           <driver-source value="BUNDLED" />
           <driver-library value="" />
           <driver value="" />
@@ -159,7 +158,6 @@
           <tns-folder value="" />
           <tns-profile value="" />
           <files>
-            <file path="C:\Users\33455\Desktop\Music" schema="Music" />
             <file path="sqlite.db" schema="main" />
           </files>
           <type value="NONE" />
@@ -637,5 +635,9 @@
         </visibility-settings>
       </environment>
     </general-settings>
+  </component>
+  <component name="DBNavigator.Project.StatementExecutionManager">
+    <execution-variables />
+    <execution-variable-types />
   </component>
 </project>

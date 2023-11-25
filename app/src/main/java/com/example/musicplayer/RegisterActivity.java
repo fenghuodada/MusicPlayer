@@ -2,6 +2,7 @@ package com.example.musicplayer;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -49,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
 //                注册成功
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
-                Cursor cursor = db.query("userInformation", new String[]{"user_name"}, "user_name=?", new String[]{user.getText().toString()}, null, null, null);
+                @SuppressLint("Recycle") Cursor cursor = db.query("userInformation", new String[]{"user_name"}, "user_name=?", new String[]{user.getText().toString()}, null, null, null);
                 if (checkBox.isChecked()) {
                     if (user.getText().toString().trim().length()==0||pwd.getText().toString().trim().length()==0) {
                     Toast.makeText(RegisterActivity.this, getString(R.string.user_name_and_pwd_name_is_not_filled),Toast.LENGTH_SHORT).show();

@@ -1,64 +1,60 @@
 package com.example.musicplayer;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ListingMusicFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ListingMusicFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public ListingMusicFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MusicList.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ListingMusicFragment newInstance(String param1, String param2) {
-        ListingMusicFragment fragment = new ListingMusicFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+//    声明循环控件
+    private RecyclerView musicReclcle;
+//    声明适配器
+    private MusicRecycleAdapter adapter;
+//    声明布局管理器
+    private LinearLayoutManager linearLayoutManager;
+    private ClickItemListener itemClick;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_music_list, container, false);
+        View view=inflater.inflate(R.layout.fragment_music_list, container, false);
+//        实例化循环控件
+        musicReclcle=view.findViewById(R.id.music_recycle);
+//        对控件进行设置
+        initsetAdapter();
+        return view;
     }
+    @SuppressLint("NotifyDataSetChanged")
+    private void initsetAdapter() {
+//        实例化适配器
+        adapter=new MusicRecycleAdapter(getActivity());
+//        确定布局管理器
+        linearLayoutManager = new LinearLayoutManager(getActivity(), RecyclerView.VERTICAL, false);
+//        设置布局方式
+        musicReclcle.setLayoutManager(linearLayoutManager);
+//        适配数据源
+        musicReclcle.setAdapter(adapter);
+        adapter.setOnItemClickListener(new MusicRecycleAdapter.onItemClickListener() {
+            @Override
+            public void onItemListener(View view, int position) {
+                    itemClick.sendPosition(position);
+            }
+        });
+    }
+    public void setClickItemListener(ClickItemListener listener){
+        this.itemClick=listener;
+    }
+    public interface ClickItemListener{
+        public void sendPosition(int posion);
+    }
+
 }

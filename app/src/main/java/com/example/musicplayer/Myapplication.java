@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -25,6 +26,16 @@ public class Myapplication extends Application {
 
     public static MyMediaPlayer musicplayer;
 
+    public static boolean getISend() {
+        return ISend;
+    }
+
+    public static void setISend(boolean ISend) {
+        Myapplication.ISend = ISend;
+    }
+
+    private static boolean ISend;
+
     public static int getMusicSongInPosition() {
         return musicSongInPosition;
     }
@@ -34,6 +45,16 @@ public class Myapplication extends Application {
     }
 
     private static int musicSongInPosition;
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        Myapplication.username = username;
+    }
+
+    private static String username;
 
     private static int musicPosition;
     public static List<MusicBean> getDataMusicList() {
@@ -60,11 +81,14 @@ public class Myapplication extends Application {
         Myapplication.setMusicPosition(0);
         Myapplication.setMusicSongInPosition(0);
         musicplayer=new MyMediaPlayer();
+        Myapplication.setISend(false);
     }
 public static Myapplication getMyapplication(){
         return myapplication;
 
 }
+
+
 //    获取数据
     public static List<MusicBean> onCreatDate(){
         dataMusicList=new ArrayList<MusicBean>();
@@ -75,7 +99,8 @@ public static Myapplication getMyapplication(){
 //        开始查询
         Cursor cursor = contentResolver.query(uri, null, null, null, null);
 //        遍历对象
-        int id=0;//统计个数
+        int id=0;
+        //统计个数
         if (cursor!=null&&cursor.getCount()>0) {
             cursor.moveToFirst();
             while(cursor.moveToNext()){
@@ -96,7 +121,7 @@ public static Myapplication getMyapplication(){
                 @SuppressLint("Range")
 //                        音乐时长
                 long duration=cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION));
-                if (duration==0) {
+                if (duration==0||singer=="<unknown>") {
                     continue;
                 }
                 @SuppressLint("SimpleDateFormat")
@@ -111,94 +136,6 @@ public static Myapplication getMyapplication(){
         return dataMusicList;
 
     }
-/*//    创建播放器
-    public static void onCreateMusicPlayer(){
-        musicPlayer=new MediaPlayer();
-    }
-//    释放播放器
-    public  static void onDesoryMusicPlayer(){
-        musicPlayer.release();
-    }
-//    歌曲切换
-    public  static void onMusicChange(){
-        if (musicPlayer!=null) {
-            MusicBean musicDatePosition=Myapplication.dataMusicList.get(musicPosition);
-            if (musicPlayer.isPlaying()) {
-                musicPlayer.pause();
-                return;
-            }
-            musicPlayer.stop();
-            musicPlayer.reset();
-            try {
-                musicPlayer.setDataSource(musicDatePosition.getPath());
-                musicPlayer.prepare();
-                musicPlayer.seekTo(0);
-                musicPlayer.start();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }else {
-            Toast.makeText(myapplication.getApplicationContext(),myapplication.getString( R.string.no_have_musicplayer),Toast.LENGTH_LONG).show();
-        }
-
-    }
-//    歌曲暂停和继续
-    public  static void onMusicPause(ImageView view){
-        if (musicPlayer!=null) {
-            if (musicPlayer.isPlaying()) {
-                musicPlayer.pause();
-                musicSongInPosition=musicPlayer.getCurrentPosition();
-                view.setImageResource(R.drawable.pause);
-            }else {
-                musicPlayer.seekTo(musicSongInPosition);
-                musicPlayer.start();
-                view.setImageResource(R.drawable.play);
-            }
-        }else {
-            Toast.makeText(myapplication.getApplicationContext(),myapplication.getString( R.string.no_have_musicplayer),Toast.LENGTH_LONG).show();
-        }
-
-    }
-//    上一曲
-
-    public static void onMusicNext(){
-        if (musicPosition== Myapplication.dataMusicList.size()-1) {
-            Toast.makeText(myapplication.getApplicationContext(), myapplication.getString(R.string.lastMusic),Toast.LENGTH_SHORT).show();
-        } else if (musicPosition>=0&&musicPosition<Myapplication.dataMusicList.size()-1) {
-            musicPosition++;
-            Myapplication.onMusicChange();
-        }else {
-            Toast.makeText(myapplication.getApplicationContext(), myapplication.getString(R.string.song_not_exist),Toast.LENGTH_SHORT).show();
-        }
-    }
-//    下一曲
-
-    public static void onMusicLast(){
-        if (musicPosition==0) {
-            Toast.makeText(myapplication.getApplicationContext(), myapplication.getString(R.string.firstMusic),Toast.LENGTH_SHORT).show();
-        } else if (musicPosition>0&&musicPosition<=Myapplication.dataMusicList.size()-1) {
-            musicPosition--;
-            Myapplication.onMusicChange();
-        }else {
-            Toast.makeText(myapplication.getApplicationContext(), myapplication.getString(R.string.song_not_exist),Toast.LENGTH_SHORT).show();
-        }
-    }
-//    获取歌曲的时长
-*//*    public static int onMusicTimeTotal(int musicPosition){
-        MusicBean musicdata=Myapplication.dataMusicList.get(musicPosition);
-        MediaPlayer mediaPlayered=new MediaPlayer();
-        try {
-            mediaPlayered.setDataSource(musicdata.getPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        int resultMusic=mediaPlayered.getDuration();
-        mediaPlayered.release();
-        return resultMusic;
-    }*//*
-public  int onMusicTimeTotal(){
-    return musicPlayer.getDuration();
-}*/
 }
 
 

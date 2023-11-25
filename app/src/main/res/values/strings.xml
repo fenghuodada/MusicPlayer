@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MusicPlayer</string>
+    <string name="app_name">笨蛋音乐屋</string>
     <string name="name_user">手机号码:</string>
     <string name="user_hint">请输入号码</string>
     <string name="name_pwd">密 码:</string>
@@ -122,4 +122,17 @@
     <string name="firstMusic">目前是第一首</string>
     <string name="song_not_exist">歌曲不存在</string>
     <string name="songerror">歌曲错误</string>
+    <string name="q_q">Q Q:</string>
+    <string name="weichat">微 信:</string>
+    <string name="wangyun">星空云:</string>
+    <string name="entermusic">保存,并返回个人界面</string>
+    <string name="putsuccess">存储成功</string>
+    <string name="names">账 号:</string>
+    <string name="bendan">笨蛋发什么呆,赶紧进入</string>
+    <string name="musictocom">welcome to the music hall</string>
+    <string name="name_user_">请输入账号</string>
+    <string name="putintomima">请输入密码</string>
+    <string name="yueduxieyi">请阅读相关协议</string>
+    <string name="ensure__pwd">确认密码</string>
+    <string name="play_list">播放列表</string>
 </resources>
